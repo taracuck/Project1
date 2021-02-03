@@ -4,6 +4,37 @@ body {
   background-color: gray;
 }
 
+img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.starter-div {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 0;
+  top: 0;
+}
+
+.popUp {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  align-items: center;
+}
+
+.start-button {
+  padding: 5px;
+  border-radius: 5px;
+  width: 100px;
+}
+
 .header {
   background-color: black;
   color: white;
@@ -29,7 +60,7 @@ body {
   border-radius: 5px;
 }
 
-.card-container {
+.board {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -38,16 +69,22 @@ body {
   height: 500px;
 }
 
-.card {
+.card-container {
   border: 1px solid black;
   width: 100px;
   height: 150px;
-  /* padding: 10px; */
-  /* width: 150px;
-  height: 200px; */
   margin: 8px;
   padding: 5px;
   border-radius: 10px;
   background-color: white;
   box-sizing: border-box;
+  object-fit: contain;
+}
+
+@media only screen and (min-width: 760px) {
+  .card-container {
+    padding: 10px;
+    width: 175px;
+    height: 225px;
+  }
 }
