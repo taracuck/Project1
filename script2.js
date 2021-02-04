@@ -57,31 +57,42 @@ let imageSources = [
   },
 ];
 
-let seconds = 100000;
+let isWaiting = false;
+let isRunning = false;
+let seconds = 30;
 let countdownTimer;
 let finalCountdown = false;
 
-const gameTimer = () => {
-  // console.log(seconds);
-  if (seconds >= 10) {
-    document.querySelector(".game-timer").innerHTML = `:${seconds}`;
-  } else if (seconds < 10 && seconds > 0) {
-    document.querySelector(".game-timer").style.color = "red";
-    document.querySelector(".game-timer").innerHTML = `:0${seconds}`;
+function GameTimer() {
+  if(seconds > 0){
+    document.querySelector("game-timer").innerHTML = `:${remainingSeconds}`
+  } if(seconds === 0){
+
   }
-  if (seconds === 0) {
-    // starterDiv.add();
-    starterDiv.style.display = "initial";
-    document.querySelector(".popUp-p").textContent = "YOU LOST.";
-    startButton.textContent = "Try again?";
-  }
-  seconds--;
-};
+  // let minutes = Math.round((seconds - 30) / 60);
+  // let remainingSeconds = seconds % 60;
+//   if (remainingSeconds < 10) {
+//     remainingSeconds = "0" + remainingSeconds;
+//   }
+//   document.querySelector("game-timer").innerHTML = `:${remainingSeconds}`
+//   if (seconds == 0) {
+//     isRunning = true;
+//     seconds += 2;
+
+//     if (finalCountdown) {
+//       clearInterval(countdownTimer); // Clear the interval to stop the loop
+//     } else {
+//       finalCountdown = true; // This will allow the 2 additional seconds only once.
+//     }
+//   } else {
+//     isWaiting = true;
+//     seconds--;
+//   }
+// }
+countdownTimer = setInterval(GameTimer, 1000); // Pass function reference, don't invoke it.
 
 startButton.addEventListener("click", () => {
-  // starterDiv.remove();
-  starterDiv.style.display = "none";
-  countdownTimer = setInterval(gameTimer, 1000);
+  starterDiv.remove();
 });
 
 // shuffle function
@@ -108,16 +119,13 @@ const assignPictures = () => {
   for (let i = 0; i < imageSources.length; i++) {
     let cardFrontDiv = document.createElement("div");
     let cardBackDiv = document.createElement("div");
-    cardFrontDiv.classList.add("flip-card-front");
-    cardBackDiv.classList.add("flip-card-back");
+    cardFrontDiv.classList.add("card-container", "flip-card-front");
+    cardBackDiv.classList.add("card-container", "flip-card-back");
     let cardFront = document.createElement("img");
     let cardBack = document.createElement("img");
     cardFront.src = imageSources[i].src;
     cardFront.id = imageSources[i].id;
-    // cardBack.src = "assets/dynamic-duo-text-01.png";
-    cardBack.style.backgroundImage = `url(assets/dynamic-duo-text-01.png)`;
-    cardBack.style.backgroundPosition = "center";
-    cardBack.style.backgroundSize = "cover";
+    cardBack.src = "assets/dynamic-duo-text.svg";
     cardBack.id = "back";
     cardFrontDiv.append(cardFront);
     cardBackDiv.append(cardBack);
@@ -132,11 +140,10 @@ const assignPictures = () => {
 };
 
 board.addEventListener("click", (e) => {
-  console.log(e.target);
-  if (e.target.classList.contains("flip-card") || e.target.id === "back") {
-    // e.target.classList.add("flipped");
-    // flipCardInner.classList.add("flipped");
-    document.querySelector(".flip-card-inner").classList.add("flipped");
+  if (e.target.classList.contains("flip-card")) {
+    console.log("click");
+    cardFrontDiv.style.display = "initial";
+    flipCardInner.style.transform = "rotateY(180deg)";
   }
 });
 
@@ -149,8 +156,3 @@ resetButton.addEventListener("click", () => {
 });
 
 display();
-
-// need to add event listener for two clicks
-// cardContainer.addEventListener("click", (e)=>{
-//     if (e.target.id ===)
-// })
