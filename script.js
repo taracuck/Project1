@@ -5,8 +5,10 @@ let board = document.querySelector(".board");
 let resetButton = document.querySelector(".reset-button");
 let starterDiv = document.querySelector(".starter-div");
 let startButton = document.querySelector(".start-button");
+let homeTab = document.querySelector(".home");
+let theOfficeTab = document.querySelector(".office");
 
-let imageSources = [
+let defaultImageSources = [
   {
     src: "assets/anna.jpeg",
     id: 1,
@@ -57,12 +59,11 @@ let imageSources = [
   },
 ];
 
-let seconds = 100000;
+let seconds = 30;
 let countdownTimer;
 let finalCountdown = false;
 
 const gameTimer = () => {
-  // console.log(seconds);
   if (seconds >= 10) {
     document.querySelector(".game-timer").innerHTML = `:${seconds}`;
   } else if (seconds < 10 && seconds > 0) {
@@ -79,7 +80,6 @@ const gameTimer = () => {
 };
 
 startButton.addEventListener("click", () => {
-  // starterDiv.remove();
   starterDiv.style.display = "none";
   countdownTimer = setInterval(gameTimer, 1000);
 });
@@ -102,25 +102,29 @@ const shuffle = (images) => {
   return images;
 };
 
-const assignPictures = () => {
+const assignPictures = (imageSources) => {
   board.innerHTML = "";
   imageSources = shuffle(imageSources);
   for (let i = 0; i < imageSources.length; i++) {
+    // front of card
     let cardFrontDiv = document.createElement("div");
-    let cardBackDiv = document.createElement("div");
     cardFrontDiv.classList.add("flip-card-front");
-    cardBackDiv.classList.add("flip-card-back");
     let cardFront = document.createElement("img");
-    let cardBack = document.createElement("img");
+    cardFront.classList.add("image");
     cardFront.src = imageSources[i].src;
     cardFront.id = imageSources[i].id;
-    // cardBack.src = "assets/dynamic-duo-text-01.png";
+    cardFrontDiv.append(cardFront);
+    // back of card
+    let cardBackDiv = document.createElement("div");
+    cardBackDiv.classList.add("flip-card-back");
+    let cardBack = document.createElement("img");
+    cardBack.classList.add("image");
     cardBack.style.backgroundImage = `url(assets/dynamic-duo-text-01.png)`;
     cardBack.style.backgroundPosition = "center";
     cardBack.style.backgroundSize = "cover";
     cardBack.id = "back";
-    cardFrontDiv.append(cardFront);
     cardBackDiv.append(cardBack);
+    // flip card inner - holds front and back of cards
     let flipCardInner = document.createElement("div");
     flipCardInner.classList.add("flip-card-inner");
     flipCardInner.append(cardFrontDiv, cardBackDiv);
@@ -133,24 +137,85 @@ const assignPictures = () => {
 
 board.addEventListener("click", (e) => {
   console.log(e.target);
-  if (e.target.classList.contains("flip-card") || e.target.id === "back") {
-    // e.target.classList.add("flipped");
-    // flipCardInner.classList.add("flipped");
-    document.querySelector(".flip-card-inner").classList.add("flipped");
+  if (e.target.classList.contains("image") || e.target.id === "back") {
+    e.target.parentNode.parentNode.classList.add("flipped");
   }
 });
 
-const display = () => {
-  assignPictures();
-};
-
 resetButton.addEventListener("click", () => {
-  display();
+  display(defaultImageSources);
+  clearInterval(gameTimer);
+  seconds = 30;
+  gameTimer();
 });
 
-display();
+theOfficeTab.addEventListener("click", () => {
+  let OfficeImageSources = [
+    {
+      src: "assets/the-office/andy.jpg",
+      id: 1,
+    },
+    {
+      src: "assets/the-office/angela.jpg",
+      id: 2,
+    },
+    {
+      src: "assets/the-office/bob.jpg",
+      id: 3,
+    },
+    {
+      src: "assets/the-office/dwight.jpg",
+      id: 2,
+    },
+    {
+      src: "assets/the-office/erin.jpg",
+      id: 1,
+    },
+    {
+      src: "assets/the-office/holly.jpg",
+      id: 4,
+    },
+    {
+      src: "assets/the-office/jim.png",
+      id: 5,
+    },
+    {
+      src: "assets/the-office/kelly.jpg",
+      id: 6,
+    },
+    {
+      src: "assets/the-office/michael.png",
+      id: 4,
+    },
+    {
+      src: "assets/the-office/pam.jpg",
+      id: 5,
+    },
+    {
+      src: "assets/the-office/phyllis.jpg",
+      id: 3,
+    },
+    {
+      src: "assets/the-office/ryan.png",
+      id: 6,
+    },
+  ];
+  display(OfficeImageSources);
+  clearInterval(gameTimer);
+  seconds = 30;
+  gameTimer();
+});
 
-// need to add event listener for two clicks
-// cardContainer.addEventListener("click", (e)=>{
-//     if (e.target.id ===)
-// })
+homeTab.addEventListener("click", () => {
+  display(defaultImageSources);
+  clearInterval(gameTimer);
+  seconds = 30;
+  gameTimer();
+});
+
+const display = (imageSources) => {
+  assignPictures(imageSources);
+};
+
+//function ran to display the game
+display(defaultImageSources);

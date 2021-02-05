@@ -5,10 +5,13 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
-img {
+.image {
   object-fit: cover;
   width: 100%;
   height: 100%;
+  border: 10px solid white;
+  border-radius: 10px;
+  box-sizing: border-box;
 }
 
 .starter-div {
@@ -41,8 +44,13 @@ img {
   background-color: #140d43;
   color: white;
   text-align: center;
-  padding: 10px;
-  margin-bottom: 15px;
+  padding: 20px;
+}
+
+.header-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .game-name {
@@ -55,20 +63,48 @@ img {
   justify-content: center;
 }
 
+.header-nav {
+  display: flex;
+  align-items: center;
+}
+
+.tab {
+  text-decoration: none;
+  color: white;
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid white;
+}
+
+.game-options {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.game-timer {
+  margin: 5px;
+}
+
 .reset-button {
   background-color: white;
   color: black;
-  padding: 5px;
+  padding: 10px;
   border-radius: 5px;
 }
 
+.spacing {
+  margin: 10px;
+}
+
 .board {
+  padding-top: 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  margin-top: 5px;
-  height: 500px;
+  background-image: url(assets/dynamic-duo-bg-01.png);
+  background-size: 100%;
 }
 
 .flipped {
@@ -79,31 +115,25 @@ img {
 }
 
 .flip-card {
-  background-color: white;
+  background-color: none;
   border-radius: 10px;
   width: 100px;
   height: 150px;
   perspective: 1000px;
   margin: 10px;
-  border: 10px solid white;
+  /* border: 10px solid white; */
   box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.5);
 }
 
 /* This container is needed to position the front and back side */
 .flip-card-inner {
   position: relative;
-  /* border: 1px solid gray; */
   width: 100%;
   height: 100%;
   text-align: center;
   transition: transform 0.8s;
   transform-style: preserve-3d;
 }
-
-/* Do an horizontal flip when you move the mouse over the flip box container */
-/* .flip-card:hover .flip-card-inner {
-  transform: rotateY(180deg);
-} */
 
 /* Position the front and back side */
 .flip-card-front,
@@ -117,15 +147,12 @@ img {
 
 /* Style the front side (fallback if image is missing) */
 .flip-card-front {
-  background-color: #bbb;
-  color: black;
+  transform: rotateY(180deg);
 }
 
 /* Style the back side */
 .flip-card-back {
-  background-color: dodgerblue;
   color: white;
-  transform: rotateY(180deg);
 }
 
 @media only screen and (min-width: 760px) {
