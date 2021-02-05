@@ -7,6 +7,8 @@ let starterDiv = document.querySelector(".starter-div");
 let startButton = document.querySelector(".start-button");
 let homeTab = document.querySelector(".home");
 let theOfficeTab = document.querySelector(".office");
+let clickCounter = document.createElement("array");
+clickCounter = [];
 
 let defaultImageSources = [
   {
@@ -59,9 +61,10 @@ let defaultImageSources = [
   },
 ];
 
-let seconds = 30;
+let seconds = 45;
 let countdownTimer;
 let finalCountdown = false;
+let cardsRemoved = 0;
 
 const gameTimer = () => {
   if (seconds >= 10) {
@@ -71,17 +74,41 @@ const gameTimer = () => {
     document.querySelector(".game-timer").innerHTML = `:0${seconds}`;
   }
   if (seconds === 0) {
-    // starterDiv.add();
-    starterDiv.style.display = "initial";
-    document.querySelector(".popUp-p").textContent = "YOU LOST.";
-    startButton.textContent = "Try again?";
+    let endDiv = document.createElement("div");
+    endDiv.classList.add("end-div");
+    let gameOverParagraph = document.createElement("p");
+    gameOverParagraph.classList.add("popUp-p");
+    gameOverParagraph.textContent = "YOU LOST :(";
+    gameOverParagraph.style.color = "white";
+
+    let gameOverButton = document.createElement("button");
+    gameOverButton.classList.add("start-button");
+    gameOverButton.textContent = "Try Again?";
+    let gameOverPopUp = document.createElement("div");
+    gameOverPopUp.classList.add("game-over");
+    gameOverPopUp.append(gameOverParagraph, gameOverButton);
+    endDiv.append(gameOverPopUp);
+    document.body.append(endDiv);
+    gameOverButton.addEventListener("click", () => {
+      display(defaultImageSources);
+      clearInterval(gameTimer);
+      document.querySelector(".game-timer").style.color = "white";
+      seconds = 45;
+      endDiv.style.display = "none";
+      let cardsRemoved = 0;
+      gameTimer();
+    });
   }
   seconds--;
 };
 
 startButton.addEventListener("click", () => {
   starterDiv.style.display = "none";
+  clearInterval(gameTimer);
+  document.querySelector(".game-timer").style.color = "white";
+  seconds = 45;
   countdownTimer = setInterval(gameTimer, 1000);
+  let cardsRemoved = 0;
 });
 
 // shuffle function
@@ -103,6 +130,7 @@ const shuffle = (images) => {
 };
 
 const assignPictures = (imageSources) => {
+  let cardsRemoved = 0;
   board.innerHTML = "";
   imageSources = shuffle(imageSources);
   for (let i = 0; i < imageSources.length; i++) {
@@ -112,17 +140,21 @@ const assignPictures = (imageSources) => {
     let cardFront = document.createElement("img");
     cardFront.classList.add("image");
     cardFront.src = imageSources[i].src;
-    cardFront.id = imageSources[i].id;
     cardFrontDiv.append(cardFront);
     // back of card
     let cardBackDiv = document.createElement("div");
     cardBackDiv.classList.add("flip-card-back");
+
     let cardBack = document.createElement("img");
+    cardBack.classList.add("card-back");
     cardBack.classList.add("image");
     cardBack.style.backgroundImage = `url(assets/dynamic-duo-text-01.png)`;
     cardBack.style.backgroundPosition = "center";
     cardBack.style.backgroundSize = "cover";
-    cardBack.id = "back";
+    // cardBack.id += "back";
+    // cardBack.setAttribute("side", "back");
+
+    cardBack.id = imageSources[i].id;
     cardBackDiv.append(cardBack);
     // flip card inner - holds front and back of cards
     let flipCardInner = document.createElement("div");
@@ -136,16 +168,60 @@ const assignPictures = (imageSources) => {
 };
 
 board.addEventListener("click", (e) => {
-  console.log(e.target);
-  if (e.target.classList.contains("image") || e.target.id === "back") {
+  if (
+    // e.target.classList.contains("image") &&
+    e.target.classList.contains("card-back") &&
+    clickCounter.length < 2
+  ) {
     e.target.parentNode.parentNode.classList.add("flipped");
+    clickCounter.push(e.target);
+    if (clickCounter.length === 2) {
+      setTimeout(() => {
+        if (clickCounter[0].id === clickCounter[1].id) {
+          clickCounter[0].parentNode.parentNode.style.display = "none";
+          clickCounter[1].parentNode.parentNode.style.display = "none";
+          cardsRemoved += 2;
+          if (cardsRemoved === 12) {
+            let endDiv = document.createElement("div");
+            endDiv.classList.add("end-div");
+            let gameOverImg = document.createElement("img");
+            gameOverImg.src = "assets/dynamic-duo-winner-01.png";
+            let gameOverButton = document.createElement("button");
+            gameOverButton.classList.add("start-button");
+            gameOverButton.textContent = "Try Again?";
+            let gameOverPopUp = document.createElement("div");
+            gameOverPopUp.classList.add("game-over");
+            gameOverPopUp.append(gameOverImg, gameOverButton);
+            endDiv.append(gameOverPopUp);
+            document.body.append(endDiv);
+            clearInterval(gameTimer);
+            gameOverButton.addEventListener("click", () => {
+              display(defaultImageSources);
+              clearInterval(gameTimer);
+              document.querySelector(".game-timer").style.color = "white";
+              seconds = 45;
+              endDiv.style.display = "none";
+              gameTimer();
+            });
+          }
+        } else {
+          clickCounter[0].parentNode.parentNode.classList.remove("flipped");
+          clickCounter[1].parentNode.parentNode.classList.remove("flipped");
+        }
+        clickCounter = [];
+      }, 1000);
+    }
+
+    console.log(e.target);
+    console.log(clickCounter);
   }
 });
 
 resetButton.addEventListener("click", () => {
   display(defaultImageSources);
   clearInterval(gameTimer);
-  seconds = 30;
+  document.querySelector(".game-timer").style.color = "white";
+  seconds = 45;
   gameTimer();
 });
 
@@ -202,14 +278,16 @@ theOfficeTab.addEventListener("click", () => {
   ];
   display(OfficeImageSources);
   clearInterval(gameTimer);
-  seconds = 30;
+  document.querySelector(".game-timer").style.color = "white";
+  seconds = 45;
   gameTimer();
 });
 
 homeTab.addEventListener("click", () => {
   display(defaultImageSources);
   clearInterval(gameTimer);
-  seconds = 30;
+  document.querySelector(".game-timer").style.color = "white";
+  seconds = 45;
   gameTimer();
 });
 

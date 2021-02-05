@@ -3,18 +3,41 @@ body {
   padding: 0;
   background-color: gray;
   font-family: "Roboto", sans-serif;
+  height: 100%;
+}
+
+html {
+  height: 100%;
 }
 
 .image {
   object-fit: cover;
   width: 100%;
   height: 100%;
-  border: 10px solid white;
+  border: 5px solid white;
   border-radius: 10px;
   box-sizing: border-box;
+  box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.5);
 }
 
 .starter-div {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 0;
+  top: 0;
+  z-index: 1;
+}
+
+.end-div {
+  background-color: #be1e2d;
+}
+
+.game-over {
   position: fixed;
   height: 100%;
   width: 100%;
@@ -44,7 +67,6 @@ body {
   background-color: #140d43;
   color: white;
   text-align: center;
-  padding: 20px;
 }
 
 .header-info {
@@ -56,6 +78,7 @@ body {
 .game-name {
   margin: 0;
   padding: 0;
+  width: 150px;
 }
 
 .button-container {
@@ -64,16 +87,15 @@ body {
 }
 
 .header-nav {
-  display: flex;
   align-items: center;
 }
 
 .tab {
   text-decoration: none;
   color: white;
-  padding: 10px;
-  margin: 10px;
-  border: 1px solid white;
+  padding: 5px;
+  margin: 5px;
+  /* border: 1px solid white; */
 }
 
 .game-options {
@@ -122,7 +144,7 @@ body {
   perspective: 1000px;
   margin: 10px;
   /* border: 10px solid white; */
-  box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.5);
+  /* box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.5); */
 }
 
 /* This container is needed to position the front and back side */
@@ -160,5 +182,18 @@ body {
     /* padding: 10px; */
     width: 175px;
     height: 225px;
+  }
+  .game-name {
+    width: 250px;
+  }
+  .image {
+    border: 10px solid white;
+  }
+  .header-nav {
+    display: flex;
+  }
+  .tab {
+    padding: 10px;
+    margin: 10px;
   }
 }
