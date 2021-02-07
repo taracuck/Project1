@@ -22,6 +22,16 @@ html {
   box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.5);
 }
 
+.challenge-image {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  border: 2px solid white;
+  border-radius: 10px;
+  box-sizing: border-box;
+  box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.5);
+}
+
 .starter-div {
   position: fixed;
   height: 100%;
@@ -35,17 +45,24 @@ html {
   z-index: 1;
 }
 
-.game-over {
+.end-div {
   position: fixed;
   height: 100%;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.8);
-  display: flex;
-  justify-content: space-around;
   align-items: center;
+  justify-content: center;
   left: 0;
   top: 0;
   z-index: 1;
+  text-align: center;
+  display: flex;
+}
+
+.game-over {
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
 }
 
 .popUp {
@@ -53,6 +70,7 @@ html {
   flex-direction: column;
   color: white;
   align-items: center;
+  justify-content: space-around;
 }
 
 .popUp-p {
@@ -60,6 +78,22 @@ html {
   font-weight: bolder;
   color: #fff200;
   text-align: center;
+  margin-bottom: 10px;
+}
+
+.explanation-p {
+  font-size: 22px;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  margin: 15px 5px 10px 5px;
+}
+
+.popUp-challenge-p {
+  font-size: 22px;
+  color: white;
+  text-align: center;
+  font-weight: bold;
 }
 
 .button {
@@ -114,6 +148,11 @@ html {
   font-size: 12px;
 }
 
+.red {
+  color: #be1e2d;
+  font-weight: bolder;
+}
+
 .game-options {
   display: flex;
   justify-content: center;
@@ -140,7 +179,16 @@ html {
 }
 
 .game-over-img {
-  width: 200px;
+  width: 250px;
+}
+
+.game-over-time-p {
+  color: white;
+  margin-top: 20px;
+}
+
+.game-over-button {
+  margin: 20px;
 }
 
 .spacing {
@@ -169,11 +217,18 @@ html {
   background-color: none;
   border-radius: 10px;
   width: 100px;
-  height: 150px;
+  height: 135px;
   perspective: 1000px;
-  margin: 10px;
-  /* border: 10px solid white; */
-  /* box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.5); */
+  margin: 3px;
+}
+
+.challenge-flip-card {
+  background-color: none;
+  border-radius: 10px;
+  width: 80px;
+  height: 105px;
+  perspective: 1000px;
+  margin: 5px;
 }
 
 /* This container is needed to position the front and back side */
@@ -206,17 +261,42 @@ html {
   color: white;
 }
 
-@media only screen and (min-width: 760px) {
+.card-back {
+  background-position: center;
+  background-size: cover;
+}
+
+/* ipads/tablets - 481 - 768px */
+@media only screen and (min-width: 481px) {
   .flip-card {
-    /* padding: 10px; */
+    width: 130px;
+    height: 175px;
+    margin: 5px;
+  }
+
+  .challenge-flip-card {
+    width: 90px;
+    height: 115px;
+    margin: 5px;
+  }
+}
+
+/* small screens/laptops */
+@media only screen and (min-width: 768px) {
+  .flip-card {
     width: 175px;
     height: 225px;
+  }
+  .challenge-flip-card {
+    width: 140px;
+    height: 180px;
+    margin: 2px;
   }
   .game-name {
     width: 250px;
   }
   .image {
-    border: 10px solid white;
+    border: 7px solid white;
   }
   .tab {
     padding: 10px;
@@ -233,10 +313,44 @@ html {
     font-size: 20px;
     padding-bottom: 0px;
   }
+  .end-div {
+    flex-direction: row;
+    justify-content: space-around;
+    display: flex;
+  }
+  .game-over {
+    align-items: center;
+    justify-content: space-around;
+    display: flex;
+  }
   .game-over-img {
     width: 650px;
   }
   .reset-button {
     width: 100px;
   }
+  .challenge-image {
+    border: 5px solid white;
+  }
 }
+
+/* @media only screen and (min-width: 1201px) {
+  .flip-card {
+    width: 275px;
+    height: 350px;
+  }
+  .challenge-flip-card {
+    width: 215px;
+    height: 250px;
+  }
+  .game-name {
+    width: 250px;
+  }
+  .theme-paragraph {
+    font-size: 20px;
+    padding-bottom: 0px;
+  }
+  .challenge-image {
+    border: 3px solid white;
+  }
+} */
