@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: gray;
+  background-image: url(assets/dynamic-duo-bg-01.png);
   font-family: "Roboto", sans-serif;
   height: 100vh;
   display: flex;
@@ -165,6 +165,7 @@ html {
 
 .timer-jpg {
   width: 35px;
+  height: 35px;
 }
 
 .game-timer {
@@ -334,7 +335,7 @@ html {
   }
 }
 
-/* @media only screen and (min-width: 1201px) {
+@media only screen and (min-width: 1500px) {
   .flip-card {
     width: 275px;
     height: 350px;
@@ -353,4 +354,4 @@ html {
   .challenge-image {
     border: 3px solid white;
   }
-} */
+}
