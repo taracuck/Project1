@@ -32,7 +32,7 @@ let defaultImageSources = [
     id: 2,
   },
   {
-    src: "assets/general/buzz.jpg",
+    src: "assets/general/buzz2.png",
     id: 3,
   },
   {
