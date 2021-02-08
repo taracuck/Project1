@@ -124,51 +124,51 @@ let OfficeImageSources = [
 ];
 let objectsImageSources = [
   {
-    src: "assets/objects/eraser.jpg",
+    src: "assets/Objects/eraser.jpg",
     id: 1,
   },
   {
-    src: "assets/objects/hammer.jpg",
+    src: "assets/Objects/hammer.jpg",
     id: 2,
   },
   {
-    src: "assets/objects/key.jpg",
+    src: "assets/Objects/key.jpg",
     id: 3,
   },
   {
-    src: "assets/objects/lock.jpg",
+    src: "assets/Objects/lock.jpg",
     id: 3,
   },
   {
-    src: "assets/objects/nail.jpg",
+    src: "assets/Objects/nail.jpg",
     id: 2,
   },
   {
-    src: "assets/objects/pencil.jpeg",
+    src: "assets/Objects/pencil.jpeg",
     id: 1,
   },
   {
-    src: "assets/objects/remote.jpeg",
+    src: "assets/Objects/remote.jpeg",
     id: 4,
   },
   {
-    src: "assets/objects/toilet.jpg",
+    src: "assets/Objects/toilet.jpg",
     id: 5,
   },
   {
-    src: "assets/objects/toothbrush.jpeg",
+    src: "assets/Objects/toothbrush.jpeg",
     id: 6,
   },
   {
-    src: "assets/objects/toothpaste.jpeg",
+    src: "assets/Objects/toothpaste.jpeg",
     id: 6,
   },
   {
-    src: "assets/objects/tp.jpg",
+    src: "assets/Objects/tp.jpg",
     id: 5,
   },
   {
-    src: "assets/objects/tv.jpg",
+    src: "assets/Objects/tv.jpg",
     id: 4,
   },
 ];
